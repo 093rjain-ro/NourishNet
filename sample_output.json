@@ -1,0 +1,19 @@
+{
+  "food_items": [
+    {"name": "Rice", "estimated_grams": 150},
+    {"name": "Dal", "estimated_grams": 100}
+  ],
+  "nutrients": {
+    "calories": 311,
+    "protein_g": 13.0,
+    "iron_mg": 1.8
+  },
+  "risk_level": "at_risk",
+  "gap_percentages": {
+    "calories": 22,
+    "protein": 0,
+    "iron": 55
+  },
+  "recommendation_en": "This meal is missing iron-rich foods, and is mildly low on calories. Consider adding a serving of leafy greens (like spinach) or a boiled egg to improve the child's nutrition profile.",
+  "recommendation_te": "ఈ భోజనంలో ఐరన్ మరియు కేలరీలు కొంచెం తక్కువగా ఉన్నాయి. పిల్లల పోషకాహారాన్ని మెరుగుపరచడానికి పాలకూర లేదా ఉడికించిన గుడ్డును ఆహారంలో చేర్చండి."
+}
