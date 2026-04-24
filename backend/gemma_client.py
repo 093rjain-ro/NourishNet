@@ -87,21 +87,21 @@ def analyze_image_for_foods(image_b64: str) -> list:
         print(f"JSON parse error for foods: {e}\nResponse was: {res}")
         return FALLBACK_FOODS
 
-def generate_recommendations(food_items: list, gaps: dict) -> tuple:
-    prompt = f"Given these food items: {food_items} and nutritional gaps (calories: {gaps.get('calories')}%, protein: {gaps.get('protein')}%, iron: {gaps.get('iron')}%)... Generate a short recommendation for a 1-5 year old child to address these gaps. Return ONLY a JSON object with keys 'recommendation_en' (English text) and 'recommendation_te' (Telugu text). No markdown, just raw JSON."
+def generate_recommendations(food_items: list, gaps: dict, language: str = "Hindi") -> tuple:
+    prompt = f"You are a nutrition assistant for ASHA health workers in rural India. Analyze the food items provided: {food_items} and nutritional gaps (calories: {gaps.get('calories')}%, protein: {gaps.get('protein')}%, iron: {gaps.get('iron')}%)... and generate a recommendation in English and also in {language}. Return JSON with recommendation_en for English and recommendation_local for the regional language. Keep both recommendations under 3 sentences, practical, and easy to understand."
     
     res = call_ollama(prompt)
     if not res:
         res = call_google_gemini(prompt)
         
     fallback_en = "Consider adding leafy greens or egg to boost iron and protein."
-    fallback_te = "ఐరన్ మరియు ప్రోటీన్‌ను పెంచడానికి ఆకుకూరలు లేదా గుడ్డును జోడించడం గురించి ఆలోచించండి."
+    fallback_local = "ఐరన్ మరియు ప్రోటీన్‌ను పెంచడానికి ఆకుకూరలు లేదా గుడ్డును జోడించడం గురించి ఆలోచించండి."
     
     if not res:
-        return fallback_en, fallback_te
+        return fallback_en, fallback_local
         
     try:
         data = json.loads(res)
-        return data.get("recommendation_en", fallback_en), data.get("recommendation_te", fallback_te)
+        return data.get("recommendation_en", fallback_en), data.get("recommendation_local", fallback_local)
     except:
-        return fallback_en, fallback_te
+        return fallback_en, fallback_local

@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+:root {
+  --primary: #1a6b3c;
+  --primary-light: #e8f5e9;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --safe: #22c55e;
+  --bg: #f8fafb;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--bg);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
