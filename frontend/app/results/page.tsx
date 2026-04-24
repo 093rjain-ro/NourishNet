@@ -31,7 +31,7 @@ export default function ResultsPage() {
       setLoadingStep(1); // Identifying foods
       
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
         let json;
         
         if (isDemo && !imageBase64) {
